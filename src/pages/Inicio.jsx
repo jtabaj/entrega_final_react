@@ -8,7 +8,7 @@ function Inicio() {
     <div
       style={{
         height: "100vh",
-        backgroundImage: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url(/src/assets/fondo.jpg)", 
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url(/fondo.jpg)", 
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
