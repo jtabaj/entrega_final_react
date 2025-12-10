@@ -58,7 +58,17 @@ const agregarCarrito = (producto) => {
     setCarrito([]);
   };
 
-  const formatJT = (num) => num.toLocaleString("es-AR", {minimumFractionDigits: 2, maximumFractionDigits: 2,});
+  const formatJT = (num) => {
+  const n = Number(num); // convierte "1500" → 1500
+  if (isNaN(n)) return "0,00"; // opcional: por si llega undefined o basura
+
+  return n.toLocaleString("es-AR", {
+    style: "decimal",
+    useGrouping: true,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
 
   // Valor que se provee a todos los componentes
   const value = {    

@@ -1,35 +1,57 @@
 import React, { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-// Crear el contexto
 // eslint-disable-next-line react-refresh/only-export-components
 export const UserContext = createContext();
 
-// Proveedor del contexto
 export function UserProvider({ children }) {
-  // Estado de autenticación
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [usuario, setUsuario]                 = useState({ nombre: "", email: "" });
+  const navigate = useNavigate();
 
-  const iniciarSesionUsuario = (nombre, email) => {
+  // 🔹 Cargar usuario desde localStorage al iniciar
+  const [usuario, setUsuario] = useState(() => {
+    const nombre = localStorage.getItem("authNombre") || "";
+    const email = localStorage.getItem("authEmail") || "";
+    return { nombre, email };
+  });
+
+  // 🔹 Cargar estado de autenticación
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const token = localStorage.getItem("authToken");
+    return token ? true : false;
+  });
+
+  // 🔹 Iniciar sesión
+  const iniciarSesion = (nombre, email = "") => {
     setIsAuthenticated(true);
+
+    // Guardar datos en localStorage
+    localStorage.setItem("authToken", `fake-token-${nombre}`);
+    localStorage.setItem("authNombre", nombre);
+    localStorage.setItem("authEmail", email);
+
+    // Guardar en estado interno
     setUsuario({ nombre, email });
   };
-  
-  // Función para cerrar sesión
+
+  // 🔹 Cerrar sesión
   const cerrarSesion = () => {
     setIsAuthenticated(false);
+
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("authNombre");
+    localStorage.removeItem("authEmail");
+
     setUsuario({ nombre: "", email: "" });
-    // vaciarCarrito(); 
+
+    navigate("/productos");
   };
 
-  // Valor que se provee a todos los componentes
+  // 🔹 esAdmin funciona SIEMPRE gracias a localStorage
   const value = {
-    // Autenticación
     isAuthenticated,
     usuario,
-    //setIsAuthenticated,
-    //setUsuario,
-    iniciarSesionUsuario,
+    esAdmin: usuario?.nombre === "admin",
+    iniciarSesion,
     cerrarSesion,
   };
 

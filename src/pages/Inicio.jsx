@@ -8,25 +8,32 @@ function Inicio() {
     <div
       style={{
         height: "100vh",
-        background: "linear-gradient(135deg, #e3f2fd, #ffffff)",
+        backgroundImage: "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.5)), url(/src/assets/fondo.jpg)", 
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         display: "flex",
-        // alignItems: "center",
-        // justifyContent: "center",
+        color: "white",         
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <Container className="text-ceter">
-        <h1 className="fw-bold text-muted mb-3">¡Bienvenidos a Mi Tienda!</h1>
+      <Container className="text-center d-flex flex-column align-items-center">
+        <h1 className="fw-bold mb-3">¡Bienvenidos a Mi Tienda!</h1>
 
-      <img
-        src="react.gif"
-        alt="Banner"
-        style={{ width: "40%", maxHeight: "400px", objectFit: "cover", borderRadius: "35px", padding: "25px" }}
-      />
+        <img
+          src="react.gif"
+          alt="Banner"
+          style={{
+            width: "40%",
+            maxHeight: "400px",
+            objectFit: "cover",
+            borderRadius: "35px",
+            padding: "25px",
+          }}
+        />
 
-        <p
-          className="text-muted fs-5 mb-4"
-          style={{ maxWidth: "600px"}}
-        >
+        <p className="fs-5 mb-4" style={{ maxWidth: "600px" }}>
           Este es el punto de partida de nuestro sitio.  
           Desde aquí podés acceder a las distintas secciones, conocer nuestros
           productos, explorar servicios y descubrir todo lo nuevo que tenemos para vos.

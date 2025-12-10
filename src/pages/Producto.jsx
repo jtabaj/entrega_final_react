@@ -16,7 +16,7 @@ function Producto() {
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        const res = await fetch(`https://68d99d6890a75154f0dac9e3.mockapi.io/tienda/prductos/${id}`);
+        const res = await fetch(`https://68d99d6890a75154f0dac9e3.mockapi.io/tienda/productos/${id}`);
         if (!res.ok) throw new Error("Error al obtener el producto");
         const data = await res.json();
         setProducto(data);
@@ -68,7 +68,7 @@ function Producto() {
     );
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 mb-5 pb-5">  
       <Row className="justify-content-center">
         <Col md={6} lg={5}>
           <Card className="shadow-lg border-0 rounded-4">
@@ -88,9 +88,15 @@ function Producto() {
               <Card.Title className="fw-bold fs-4 text-primary">
                 {producto.producto}
               </Card.Title>
+              
               <Card.Subtitle className="mb-2 text-muted">
-                Precio: ${formatJT(producto.precio)}
+                ID: {producto.id} <br/> 
+                Categoría: {producto.categoria}
               </Card.Subtitle>
+
+              <Card.Text className="mb-2 text-muted">
+                Precio: ${formatJT(producto.precio)}
+              </Card.Text>
               <Card.Text className="mt-3">
                 {producto.descripcion || "Sin descripción disponible."}
               </Card.Text>

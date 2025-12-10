@@ -8,16 +8,25 @@ import Producto from "./pages/Producto.jsx";
 import Carrito from "./pages/Carrito.jsx";
 import Footer from "./components/Footer.jsx";
 import { UserProvider } from "./context/UserContext";
-import { CartProvider } from "./context/CartContext.jsx";
+import { CartProvider } from "./context/CartContext";
+import { ProductsProvider } from "./context/ProductsContext";
 import RutaProtegida from "./pages/RutaProtegida";
 import Pagar from "./pages/Pagar";
 import IniciarSesion from "./pages/IniciarSesion";
+import Dashboard from "./pages/Dashboard";
+import FormularioProducto from "./components/FormularioProducto";
+import FormEliminarProducto from "./components/FormEliminarProducto";
+
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 
 function App() {
   return (
     <>
       <CartProvider>
         <UserProvider>
+          <ProductsProvider>  
           <Header />
           <div className="container mt-4">
             <p>Bienvenido a nuestra aplicación</p>
@@ -31,9 +40,33 @@ function App() {
               <Route path="/pagar"          element={<RutaProtegida>
                                                         <Pagar />
                                                      </RutaProtegida>} />
-            </Routes>
+              <Route path="/dashboard"      element={<RutaProtegida soloAdmin={true}>
+                                                        <Dashboard />
+                                                    </RutaProtegida>} />
+
+            {/* RUTA PROTEGIDA - Admin */}
+            <Route path="/actualizar-producto" element={<RutaProtegida soloAdmin={true}>
+                                                       <FormularioProducto />
+                                                     </RutaProtegida>}   />
+                                                            
+             
+            <Route path="/eliminar-producto" element={<RutaProtegida soloAdmin={true}>
+                                                       <FormEliminarProducto />
+                                                     </RutaProtegida>}   />
+                                                            
+            </Routes>            
           </div>
           <Footer />
+          <ToastContainer
+              position="top-right"
+              style={{ marginTop: "100px" }}  
+              autoClose={9000}
+              hideProgressBar={false}
+              closeOnClick
+              draggable
+              pauseOnHover
+          />
+          </ProductsProvider>
         </UserProvider>
       </CartProvider>
     </>

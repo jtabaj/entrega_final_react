@@ -92,7 +92,13 @@ const Header = () => {
             <Nav.Link as={Link} to="/productos" onClick={handleLinkClick}>
               <FaBoxOpen className="me-1" />Productos
             </Nav.Link>
-            
+
+            {usuario?.nombre === "admin" && (
+              <Nav.Link as={Link} to="/dashboard" onClick={handleLinkClick}>
+                <FaBoxOpen className="me-1" />Dashboard
+              </Nav.Link>
+            )}
+
             {/* Botón de autenticación */}
             <Button
               as={Link}
@@ -101,7 +107,7 @@ const Header = () => {
               className="ms-3"
               onClick={handleLinkClick}
             >
-              {usuario.nombre ? "Usuario: " + usuario.nombre : "Iniciar Sesión"}
+              {usuario?.nombre ? "Usuario: " + usuario.nombre : "Iniciar Sesión"}
             </Button>
           </Nav>
         </Navbar.Collapse>
